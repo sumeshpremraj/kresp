@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import feedparser
 import pdfkit
-import jjjjj
 
 content = '<html>'
 d = feedparser.parse('http://katekendall.com/feed/')
