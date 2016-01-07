@@ -28,7 +28,7 @@ DROP TABLE IF EXISTS `content`;
 CREATE TABLE IF NOT EXISTS `content` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `category_id` INT NOT NULL,
-  `links` varchar(200) NOT NULL,
+  `link` varchar(200) NOT NULL,
   `title` varchar(200) NOT NULL,
   `description` varchar(1000) DEFAULT NULL,
 	FOREIGN KEY (`category_id`) REFERENCES categories(`id`),
@@ -36,15 +36,21 @@ CREATE TABLE IF NOT EXISTS `content` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE IF NOT EXISTS `categories`(
+CREATE TABLE IF NOT EXISTS`categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `category_name` VARCHAR(50) NOT NULL,
-  `feed_url` VARCHAR(200) NOT NULL,
-  `site_name` Varchar(200) NOT NULL,
-   PRIMARY KEY (`id`)
-)  ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `category_name` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS`category_mapping` (
+  `category_id` int(11) NOT NULL AUTO_INCREMENT,
+  `feed_url` varchar(200) NOT NULL,
+  `site_name` varchar(200) NOT NULL,
+  KEY `category_id` (`category_id`),
+  CONSTRAINT `category_mapping_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(200) NOT NULL UNIQUE,
   `password` varchar(200) NOT NULL,
