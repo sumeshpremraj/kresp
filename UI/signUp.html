@@ -1,0 +1,129 @@
+<html>
+    <style>
+        
+        .field-container{
+            padding-top: 2%;
+        }
+                
+        @media only screen and (max-width: 768px) {
+            /* For mobile phones: */
+            .form-container{
+                    border-style: groove;
+                    padding: 10px;
+                    float: left
+                    margin-top: 10%;
+            }
+            body{
+                height: inherit;
+                background-color: beige;
+            }
+            header{
+                color:black;
+                text-align: center; 
+                padding-top: 0%;
+            }
+        }
+        
+        @media only screen and (min-width: 800px) {
+                body {
+                    background-image: url('img/bg9.jpg');
+                    background-size: cover;
+            }
+            
+             .form-container{
+                background-color: white;
+                float: right; 
+                margin-right: 30%;
+                margin-top: 10%; 
+                vertical-align: middle; 
+                border-style: inset;
+                padding: 10px; 
+            }
+            
+             header{
+                color:white;
+                text-align: center;
+            }
+            label{
+                color: black;
+                font-family: sans-serif;
+                font-size-adjust: auto;
+                font-size: 12px;
+            }
+             .button-0 {
+            position: relative;
+            padding: 8px 20px;
+            margin: 0px 10px 10px 0px;
+            border-radius: 10px;
+            font-family: 'Helvetica', cursive;
+            color: #FFF;
+            font-size: 16px;
+            text-decoration: none;  
+            background-color: #3498DB;
+            border-bottom: 5px solid #2980B9;
+            text-shadow: 0px -2px #2980B9;
+            /* Animation */
+            transition: all 0.1s;
+            -webkit-transition: all 0.1s;
+            }
+
+            .button-0:hover, 
+            .button-0:focus {
+                text-decoration: none;
+                color: #fff;
+            }
+
+            .button-0:active {
+                transform: translate(0px,5px);
+                -webkit-transform: translate(0px,5px);
+                border-bottom: 1px solid;
+            }
+        }
+        
+        
+  
+    </style>
+    <head>
+    </head>
+    <body>
+        <header>
+            <h1>SignUp</h1>
+        </header>
+        <div class="form-container">
+            <form autocomplete="on">
+                <div>
+                    <div>
+                        <input type="text" placeholder="Username- Kindle ID">
+                    </div>
+                    <div class="field-container">
+                        <input type="password" placeholder="Password" >
+                    </div>
+                     <div class="field-container">
+                        <input type="password" placeholder="Re-type Password" >
+                    </div>
+                     <div class="field-container">
+                        <label>Select the categories that you are interested in</label><br>
+                        <input type="checkbox" name="vehicle" value="Bike">Art<br>
+                        <input type="checkbox" name="vehicle" value="Bike">Sports<br>
+                        <input type="checkbox" name="vehicle" value="Bike">Comics<br>
+                      </div>
+                      <div class="field-container">
+                        <label>Our content providers are listed below. You can add personal providers as well.</label>
+                        <ul>
+                          <li>Provider 1</li>
+                          <li>Provider 2</li>
+                          <li><input type="text" placeholder="custom providers"> </li>  
+                        </ul>                         
+                      </div>
+                     <div>
+                         <p>In order to be able to receive the newsletters, <br>
+                             please add <b>kindlefellas@gmail.com</b> as a receiver on your kindle account.</p>
+                    </div>
+                    <div class="field-container">
+                        <button class="button-0" type="submit">Login</button>
+                    </div>
+                </div>    
+            </form>
+        </div>
+    </body>
+</html>
