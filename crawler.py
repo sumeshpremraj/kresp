@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 import feedparser
-import pdfkit
 import mysql.connector
 import re
 
-db=mysql.connector.connect(database="kresp",user='satya.singh')
+db=mysql.connector.connect(database="kresp",user='kresp')
 #query='insert into content (links,description) VALUES ("hello","hi")'
 cursor=db.cursor()
 #cursor.execute(query)

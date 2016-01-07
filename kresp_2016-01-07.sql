@@ -22,6 +22,7 @@
 
 # Dump of table content
 # ------------------------------------------------------------
+grant all on `kresp`.* to 'kresp'@'localhost' identified by '';
 CREATE database IF NOT EXISTS `kresp`;
 use kresp;
 DROP TABLE IF EXISTS `content`;
