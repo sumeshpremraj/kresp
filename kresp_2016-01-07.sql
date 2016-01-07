@@ -1,5 +1,4 @@
-# ************************************************************
-# Sequel Pro SQL dump
+equel Pro SQL dump
 # Version 4499
 #
 # http://www.sequelpro.com/
@@ -22,17 +21,38 @@
 
 # Dump of table content
 # ------------------------------------------------------------
-grant all on `kresp`.* to 'kresp'@'localhost' identified by '';
-CREATE database IF NOT EXISTS `kresp`;
-use kresp;
+CREATE Database IF NOT EXISTS 'kresp';
+
 DROP TABLE IF EXISTS `content`;
-CREATE TABLE `content` (
+
+CREATE TABLE IF NOT EXISTS `content` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `links` varchar(200) DEFAULT NULL,
+  `category_id` INT NOT NULL,
+  `links` varchar(200) NOT NULL,
+  `title` varchar(200) NOT NULL,
   `description` varchar(1000) DEFAULT NULL,
+	FOREIGN KEY (`category_id`) REFERENCES categories(`id`),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+CREATE TABLE IF NOT EXISTS `categories`(
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_name` VARCHAR(50) NOT NULL,
+  `feed_url` VARCHAR(200) NOT NULL,
+  `site_name` Varchar(200) NOT NULL,
+   PRIMARY KEY (`id`)
+)  ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(200) NOT NULL UNIQUE,
+  `password` varchar(200) NOT NULL,
+  `email_id` varchar(200) NOT NULL,
+  `kindle_id` varchar(200) NOT NULL,
+  `category_ids` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -42,3 +62,4 @@ CREATE TABLE `content` (
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
