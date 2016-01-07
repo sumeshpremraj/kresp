@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import feedparser
-import pdfkit
 
 content = '<html>'
 d = feedparser.parse('http://katekendall.com/feed/')
@@ -9,8 +8,7 @@ for i in d.entries:
     content += '<p>' + i['content'][0]['value'] + '</p>\n'
     #print i['content'][0]['value']
 content += '</html>'
-#print content
-pdfkit.from_string(content, 'newsletter.pdf')
+print content
 
 
 
