@@ -43,6 +43,11 @@ CREATE TABLE IF NOT EXISTS `categories` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `categories` (`id`, `category_name`)
+VALUES
+  (1, 'sports'),
+  (2, 'science');
+
 CREATE TABLE IF NOT EXISTS `category_mapping` (
   `category_id` int(11) NOT NULL AUTO_INCREMENT,
   `feed_url` varchar(200) NOT NULL,
@@ -50,6 +55,11 @@ CREATE TABLE IF NOT EXISTS `category_mapping` (
   KEY `category_id` (`category_id`),
   CONSTRAINT `category_mapping_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `category_mapping` (`category_id`, `feed_url`, `site_name`)
+VALUES
+  (1, 'http://feeds.bbci.co.uk/sport/0/football/rss.xml', 'BBC - Football'),
+  (2, 'https://www.brainpickings.org/feed/', 'Brainpickings');
 
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
