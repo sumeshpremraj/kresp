@@ -1,4 +1,4 @@
-equel Pro SQL dump
+# Sequel Pro SQL dump
 # Version 4499
 #
 # http://www.sequelpro.com/
@@ -21,9 +21,10 @@ equel Pro SQL dump
 
 # Dump of table content
 # ------------------------------------------------------------
-CREATE Database IF NOT EXISTS 'kresp';
 
-DROP TABLE IF EXISTS `content`;
+CREATE Database IF NOT EXISTS `kresp`;
+use kresp;
+grant all on `kresp`.* to 'kresp'@'localhost' identified by '';
 
 CREATE TABLE IF NOT EXISTS `content` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -36,13 +37,13 @@ CREATE TABLE IF NOT EXISTS `content` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE IF NOT EXISTS`categories` (
+CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `category_name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS`category_mapping` (
+CREATE TABLE IF NOT EXISTS `category_mapping` (
   `category_id` int(11) NOT NULL AUTO_INCREMENT,
   `feed_url` varchar(200) NOT NULL,
   `site_name` varchar(200) NOT NULL,
