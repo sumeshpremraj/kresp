@@ -21,7 +21,7 @@
 
 # Dump of table content
 # ------------------------------------------------------------
-
+DROP DATABASE `kresp`;
 CREATE Database IF NOT EXISTS `kresp`;
 use kresp;
 grant all on `kresp`.* to 'kresp'@'localhost' identified by '';
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
+insert into user(username,password,email_id,kindle_id,category_ids) values('sumeshpremraj','blah','sumeshpremraj@gmail.com','sumeshpremraj@kindle.com','1,2');
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
