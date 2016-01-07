@@ -22,10 +22,9 @@
 
 # Dump of table content
 # ------------------------------------------------------------
-CREATE Database IF NOT EXISTS 'kresp';
-
+CREATE database IF NOT EXISTS `kresp`;
+use kresp;
 DROP TABLE IF EXISTS `content`;
-
 CREATE TABLE `content` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `links` varchar(200) DEFAULT NULL,
