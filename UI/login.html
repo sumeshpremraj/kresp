@@ -30,6 +30,8 @@
                     align-items: center;
                     align-self: center;
                     margin-top: 20%;
+                    display: table;
+                    margin: auto;
             }
             body{
                 height: inherit;
@@ -39,13 +41,16 @@
         
         @media only screen and (min-width: 800px) {
                 body {
-                    background-image: url('img/bg9.jpg');
+                    background-image: url('img/bg1.jpg');
                     background-size: cover;
             }
             
              header{
                 color:white;
                 text-align: center;
+                font-family: sans-serif;
+                font-size-adjust: auto;
+                font-size: 28px; 
             }
             label{
                 color: white;
@@ -82,14 +87,23 @@
                 -webkit-transform: translate(0px,5px);
                 border-bottom: 1px solid;
             }
+            
+            .green{
+                 background-color: green;
+                border-bottom: 5px solid green;
+                text-shadow: 0px -2px green;
+            }
         }
-        
+        .right {
+            float: right;
+        }   
         
   
     </style>
     <head>
     </head>
     <body>
+         <a class="button-0 right green" href="signUp.html">Create new account</a>
         <header>
             <h1>Kindlefellas</h1>
         </header>
