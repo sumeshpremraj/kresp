@@ -1,0 +1,151 @@
+<html>
+    <style>
+        
+        .field-container{
+            padding-top: 2%;
+        }
+                
+        @media only screen and (max-width: 800px) {
+            /* For mobile phones: */
+            .form-container{
+                    border-style: groove;
+                    padding: 10px;
+                    display: table;
+                    margin: auto;
+            }
+            body{
+                height: inherit;
+                background-color: beige;
+            }
+            header{
+                color:black;
+                text-align: center; 
+                padding-top: 0%;
+            }
+        }
+        
+        @media only screen and (min-width: 800px) {
+                body {
+                    background-image: url('static/img/bg2.jpg');
+                    background-size: cover;
+            }
+            
+             .form-container{
+                background-color: white;
+                display: table;
+                margin: auto;
+                margin-top: 5%; 
+                vertical-align: middle; 
+                border-style: inset;
+                padding: 10px; 
+            }
+            
+             header{
+                color:white;
+                 margin-top: 10px;
+                text-align: center;
+                 font-family: sans-serif;
+                font-size-adjust: auto;
+                font-size: 28px;
+            }
+            label{
+                color: black;
+                font-family: sans-serif;
+                font-size-adjust: auto;
+                font-size: 12px;
+            }
+             .button-0 {
+            position: relative;
+            padding: 8px 20px;
+            margin: 0px 10px 10px 0px;
+            border-radius: 10px;
+            font-family: 'Helvetica', cursive;
+            color: #FFF;
+            font-size: 16px;
+            text-decoration: none;  
+            background-color: #3498DB;
+            border-bottom: 5px solid #2980B9;
+            text-shadow: 0px -2px #2980B9;
+            /* Animation */
+            transition: all 0.1s;
+            -webkit-transition: all 0.1s;
+            }
+
+            .button-0:hover, 
+            .button-0:focus {
+                text-decoration: none;
+                color: #fff;
+            }
+
+            .button-0:active {
+                transform: translate(0px,5px);
+                -webkit-transform: translate(0px,5px);
+                border-bottom: 1px solid;
+            }
+            .green{
+                 background-color: green;
+                 border-bottom: 5px solid green;
+                text-shadow: 0px -2px green;
+            }
+        }
+        
+          .right{
+                float: right;
+            }
+        
+  
+    </style>
+    <head>
+    </head>
+    <body>
+        <a class="button-0 right green" href="/logout">Logout</a>
+        <header>
+            <h1>Hello Kindlefella!</h1>
+        </header>
+        {% if session.logged_in %}
+            <div class="form-container">
+                <p>You can edit your preferences below.</p>
+                <form autocomplete="on">
+                    <div>
+                        <div>
+                            <label>Device Id/Username</label><br>
+                            <input type="text" placeholder="Username- Kindle ID" value="dummy@kindle.com">
+                        </div>
+                         <div class="field-container">
+                            <label>Select the categories that you are interested in</label><br>
+                            <input type="checkbox" name="vehicle" value="Bike" checked>Art<br>
+                            <input type="checkbox" name="vehicle" value="Bike">Sports<br>
+                            <input type="checkbox" name="vehicle" value="Bike" checked>Comics<br>
+                          </div>
+                          <div class="field-container">
+                            <label>Our content providers are listed below. You can add personal providers as well.</label>
+                            <ul>
+                              <li>Provider 1</li>
+                              <li>Provider 2</li>
+                              <li><input type="text" placeholder="custom providers" value="Custom Provider 1"> </li>
+                              <li><input type="text" placeholder="custom providers"> </li>  
+                            </ul>                         
+                          </div>
+                         <div class="field-container">
+                            <label>Frequency of newsletters.</label><br>
+                            <select>
+                              <option value="daily">Daily</option>
+                              <option value="weekly">Weekly</option>
+                              <option value="bi-weekly">Bi-weekly</option>
+                              <option value="monthly" selected>Monthly</option>
+                            </select>                       
+                          </div>
+                        <br>
+                         <div>
+                            <a href="/resetpwd" >Reset Password</a><br>
+                             <a href="" >Unsubscribe </a>
+                        </div>
+                        <div class="field-container">
+                            <button class="button-0" type="submit">Update</button>
+                        </div>
+                    </div>    
+                </form>
+            </div>
+         {% endif %}
+    </body>
+</html>

@@ -1,0 +1,133 @@
+<html>
+    <style>
+        
+        .field-container{
+            padding-top: 2%;
+        }
+                
+        @media only screen and (max-width: 768px) {
+            /* For mobile phones: */
+            .form-container{
+                    border-style: groove;
+                    padding: 10px;
+                    display: table;
+                    margin: auto;
+                    margin-top: 10%;
+            }
+            body{
+                height: inherit;
+                background-color: beige;
+            }
+            header{
+                color:black;
+                text-align: center; 
+                padding-top: 0%;
+            }
+        }
+        
+        @media only screen and (min-width: 800px) {
+                body {
+                    background-image: url('static/img/bg1.jpg');
+                    background-size: cover;
+            }
+            
+             .form-container{
+                background-color: white;
+                display: table;
+                margin: auto;
+                height: 200px;
+                width: 200px; 
+                margin-top: 10%; 
+                vertical-align: middle; 
+                border-style: inset;
+                padding: 10px; 
+            }
+            
+             header{
+                color:white;
+                text-align: center;
+                font-family: sans-serif;
+                font-size-adjust: auto;
+                font-size: 28px;
+            }
+            label{
+                color: black;
+                font-family: sans-serif;
+                font-size-adjust: auto;
+                font-size: 18px;
+            }
+             .button-0 {
+            position: relative;
+            padding: 8px 20px;
+            margin: 0px 10px 10px 0px;
+            border-radius: 10px;
+            font-family: 'Helvetica', cursive;
+            color: #FFF;
+            font-size: 16px;
+            text-decoration: none;  
+            background-color: #3498DB;
+            border-bottom: 5px solid #2980B9;
+            text-shadow: 0px -2px #2980B9;
+            /* Animation */
+            transition: all 0.1s;
+            -webkit-transition: all 0.1s;
+            }
+
+            .button-0:hover, 
+            .button-0:focus {
+                text-decoration: none;
+                color: #fff;
+            }
+
+            .button-0:active {
+                transform: translate(0px,5px);
+                -webkit-transform: translate(0px,5px);
+                border-bottom: 1px solid;
+            }
+         .green{
+                 background-color: green;
+                border-bottom: 5px solid green;
+                text-shadow: 0px -2px green;
+            }
+        }
+        .right {
+            float: right;
+        }  
+        
+        
+  
+    </style>
+    <head>
+    </head>
+    <body>
+        <a class="button-0 right green" href="/logout">Logout</a>
+        <header>
+            <h1>Reset Password</h1>
+        </header>
+        <div class="form-container">
+            <form>
+                <div>
+                    <div>
+                        <label>Old Password</label><br>
+                        <input type="password" >
+                    </div>
+                    <br>
+                    <div class="field-container">
+                        <label>New Password</label><br>
+                        <input type="password" >
+                    </div>
+                    <br>
+
+                    <div class="field-container">
+                        <label>Re-type New Password</label><br>
+                        <input type="password" >
+                    </div>
+                    <br>
+                    <div class="field-container">
+                        <button class="button-0" type="submit">Update Password</button>
+                    </div>
+                </div>    
+            </form>
+        </div>
+    </body>
+</html>
