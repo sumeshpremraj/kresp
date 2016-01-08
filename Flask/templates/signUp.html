@@ -5,7 +5,7 @@
             padding-top: 2%;
         }
                 
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 800px) {
             /* For mobile phones: */
             .form-container{
                     border-style: groove;
@@ -93,35 +93,35 @@
             <h1>SignUp</h1>
         </header>
         <div class="form-container">
-            <form autocomplete="on">
+            <form autocomplete="on" action="/signup" method="post">
                 <div>
                     <div>
-                        <input type="text" placeholder="Username- Kindle ID">
+                        <input type="text" name="username" placeholder="Username- Kindle ID">
                     </div>
                     <div class="field-container">
-                        <input type="password" placeholder="Password" >
+                        <input type="password" name="password" placeholder="Password" >
                     </div>
                      <div class="field-container">
-                        <input type="password" placeholder="Re-type Password" >
+                        <input type="password" name="re-password" placeholder="Re-type Password" >
                     </div>
                      <div class="field-container">
                         <label>Select the categories that you are interested in</label><br>
-                        <input type="checkbox" name="vehicle" value="Bike">Art<br>
-                        <input type="checkbox" name="vehicle" value="Bike">Sports<br>
-                        <input type="checkbox" name="vehicle" value="Bike">Comics<br>
+                        <input type="checkbox" name="category" value="Art">Art<br>
+                        <input type="checkbox" name="category" value="Sports">Sports<br>
+                        <input type="checkbox" name="category" value="Comics">Comics<br>
                       </div>
                       <div class="field-container">
                         <label>Our content providers are listed below. You can add personal providers as well.</label>
                         <ul>
                           <li>Provider 1</li>
                           <li>Provider 2</li>
-                          <li><input type="text" placeholder="custom providers"> </li>  
+                          <li><input type="text" name="providers" placeholder="custom providers"> </li>  
                         </ul>                         
                       </div>
                      <div class="field-container">
                         <label>Frequency of newsletters.</label><br>
-                        <select>
-                          <option value="daily">Daily</option>
+                        <select name="frequency">
+                          <option value="daily" >Daily</option>
                           <option value="weekly">Weekly</option>
                           <option value="bi-weekly">Bi-weekly</option>
                           <option value="monthly">Monthly</option>

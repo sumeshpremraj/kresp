@@ -109,30 +109,36 @@
                     <div>
                         <div>
                             <label>Device Id/Username</label><br>
-                            <input type="text" placeholder="Username- Kindle ID" value="dummy@kindle.com">
+                            <input type="text" placeholder="Username- Kindle ID" value={{username}}>
                         </div>
                          <div class="field-container">
                             <label>Select the categories that you are interested in</label><br>
-                            <input type="checkbox" name="vehicle" value="Bike" checked>Art<br>
-                            <input type="checkbox" name="vehicle" value="Bike">Sports<br>
-                            <input type="checkbox" name="vehicle" value="Bike" checked>Comics<br>
+                            {% for category in categories %}
+                             <input type="checkbox" value={{category}} checked >{{category}}<br>
+                            {% endfor %}
+                            {% for category in allCategories %}
+                             <input type="checkbox" value={{category}}  >{{category}}<br>
+                            {% endfor %}
                           </div>
                           <div class="field-container">
                             <label>Our content providers are listed below. You can add personal providers as well.</label>
                             <ul>
-                              <li>Provider 1</li>
-                              <li>Provider 2</li>
-                              <li><input type="text" placeholder="custom providers" value="Custom Provider 1"> </li>
-                              <li><input type="text" placeholder="custom providers"> </li>  
+                               {% for provider in providers %}    
+                                    <li><input type="text" value={{provider}}></li>
+                                {% endfor %}
+                                {% for provider in allProviders %}    
+                                    <li>{{provider}}</li>
+                                {% endfor %}
+                              <li> <input type="text" placeholder="custom provider"></li>  
                             </ul>                         
                           </div>
                          <div class="field-container">
                             <label>Frequency of newsletters.</label><br>
                             <select>
-                              <option value="daily">Daily</option>
-                              <option value="weekly">Weekly</option>
-                              <option value="bi-weekly">Bi-weekly</option>
-                              <option value="monthly" selected>Monthly</option>
+                              {% for frequency in otherFrequencies %}    
+                                    <option value={{frequency}}>{{frequency}}</option>
+                              {% endfor %}   
+                              <option value={{frequency}} selected>{{frequency}}</option>
                             </select>                       
                           </div>
                         <br>
