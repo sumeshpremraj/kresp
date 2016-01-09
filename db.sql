@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-insert into user(email_id,password,password_hash,kindle_id,category_ids) values('sumeshpremraj@gmail.com','blah','$6$rounds=677265$FIToeCcwbytFeanm$mle89QD/AAoDbBMlN7DlEZwTDjqMLDq0R2q7XxcyzQEFqlgu8/sdy4Cf9Ghng9zfXA2jj2Ylx3rHAggKnBohG0','sumeshpremraj@kindle.com','1,2');
+insert into user(email_id,password,password_hash,kindle_id,category_ids,frequency) values('sumeshpremraj@gmail.com','blah','$6$rounds=677265$FIToeCcwbytFeanm$mle89QD/AAoDbBMlN7DlEZwTDjqMLDq0R2q7XxcyzQEFqlgu8/sdy4Cf9Ghng9zfXA2jj2Ylx3rHAggKnBohG0','sumeshpremraj@kindle.com','1,2',1);
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
