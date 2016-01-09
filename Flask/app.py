@@ -4,14 +4,7 @@ from flask import request
 import mysql.connector
 import json
 from passlib.apps import custom_app_context as pwd_context
-import logging
 
-# Set up logging
-logging.basicConfig(
-    format="%(levelname)s: %(asctime)s %(message)s",
-    filename="/tmp/flask.log",
-    level=logging.INFO,
-)
 
 app = Flask(__name__)
 app.secret_key = 'SecrestKey123!#'
@@ -121,7 +114,7 @@ def signup():
                  flash("Unexpected Error")        
          else:
             flash ("There was an error")
-    else:
+    else    :
         categories_cursor=db.cursor(buffered = True)
         #get all categories not selected by user    
         categories_all_name_fetch_query = "select * from categories" 
