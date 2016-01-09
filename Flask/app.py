@@ -248,5 +248,24 @@ def update():
 def resetpwd():
     return render_template('pwdReset.html')
 
+@app.route("/unsubscribe")
+def unsubscribe():
+    try:
+        user = session['user']
+        unsubscribe_cursor=db.cursor(buffered = True)
+        unsubscribe_query='update user set active = False where email_id = "%s"' % user
+        unsubscribe_cursor.execute(unsubscribe_query)
+        db.commit()
+        if unsubscribe_cursor.rowcount:
+            return render_template('confirm-unsubscribe.html', user=user)
+        else:
+            flash("Unable to unsubscribe user " + user)
+            return redirect(url_for('.home', username=user))
+
+    except KeyError:
+        session['logged_in'] = False
+        return redirect(url_for('.login'))
+    
+
 if __name__ == "__main__":
     app.run(debug=True)
