@@ -87,13 +87,28 @@
   
     </style>
     <head>
+        <script type="application/javascript">
+    function changeProviders(){  
+        alert("here");
+        document.getElementById('theForm').setAttribute('action', '/updateProvider');
+        document.getElementById('theForm').setAttribute('method', 'post');
+        document.getElementById('theForm').submit();
+    }
+    
+    function resgisterNewUser(){
+        document.getElementById('theForm').setAttribute('action', '/signup');
+        document.getElementById('theForm').setAttribute('method', 'post');
+        document.getElementById('theForm').submit();
+    }
+    
+    </script>
     </head>
     <body>
         <header>
             <h1>SignUp</h1>
         </header>
         <div class="form-container">
-            <form autocomplete="on" action="/signup" method="post">
+            <form autocomplete="on" id="theForm" action="/signup" method="post">
                 <div>
                     <div>
                         <input type="text" name="username" placeholder="Your email id">
@@ -108,17 +123,20 @@
                     </div>
                      <div class="field-container">
                         <label>Select the categories that you are interested in</label><br>
-                        {% for category in allCategories %}
-                             <input type="checkbox" onchange="this.form.submit()" name="categories" value={{category.id}}>{{category.name}}<br>
-                        {% endfor %}
+                            {% for category in categories %}
+                             <input type="checkbox" onchange="javascript:changeProviders();" name="categories" value={{category.id}} checked >{{category.name}}<br>
+                            {% endfor %}
+                            {% for category in allCategories %}
+                             <input type="checkbox" onchange="javascript:changeProviders();" name="categories" value={{category.id}}>{{category.name}}<br>
+                            {% endfor %}
                       </div>
                       <div class="field-container">
                         <label>Our content providers are listed below. You can add personal providers as well.</label>
-                        <ul>
-                          <li>Provider 1</li>
-                          <li>Provider 2</li>
-                          <li><input type="text" name="providers" placeholder="custom providers"> </li>  
-                        </ul>                         
+                          <br>
+                        {% for provider in allProviders %}
+                             <input type="checkbox" name="categories" value={{provider.id}}>{{provider.name}}<br>
+                        {% endfor %}
+                          <input type="text" name="providers" placeholder="custom providers"> 
                       </div>
                      <div class="field-container">
                         <label>Frequency of newsletters.</label><br>
@@ -136,11 +154,11 @@
                     </div>
                     <hr>
                     <div class="field-container">
-                        <button class="button-0" type="submit">Submit</button>
+                        <button class="button-0" onClick="resgisterNewUser()">Submit</button>
                     </div>
                 </div>    
             </form>
-              {% extends "layout.html" %}
         </div>
+        {% extends "layout.html" %}
     </body>
 </html>

@@ -122,15 +122,10 @@
                           </div>
                           <div class="field-container">
                             <label>Our content providers are listed below. You can add personal providers as well.</label>
-                            <ul>
-                               <!--{% for provider in providers %}    -->
-                                    <!--<li><input type="text" value={{provider}}></li>-->
-                                <!--{% endfor %}-->
-                                {% for provider in allProviders %}    
-                                    <li>{{provider}}</li>
-                                {% endfor %}
-                              <li> <input type="text" name="provider" placeholder="custom provider"></li>  
-                            </ul>                         
+                            {% for provider in allProviders %}
+                             <input type="checkbox" name="categories" value={{provider.id}}>{{provider.name}}<br>
+                            {% endfor %}
+                            <input type="text" name="providers" placeholder="custom providers">                        
                           </div>
                          <div class="field-container">
                             <label>Frequency of newsletters.</label><br>
@@ -151,6 +146,7 @@
                     </div>    
                 </form>
             </div>
+           {% extends "layout.html" %}
          {% endif %}
     </body>
 </html>
