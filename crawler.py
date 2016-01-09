@@ -16,7 +16,7 @@ print category_mapping_cursor.rowcount
 content_cursor=db.cursor(buffered = True)
 for (id,category_id,feed_url,last_updated) in category_mapping_cursor:
 	print id
-	latest_update=parse(last_updated) if last_updated is None else datetime.datetime(1970,1,1,0,0,0,tzinfo=pytz.utc)
+	latest_update=pytz.utc.localize(last_updated) if last_updated is not None else datetime.datetime(1970,1,1,0,0,0,tzinfo=pytz.utc)
 	#latest_update=datetime.datetime(1970,1,1,0,0,0,tzinfo=pytz.utc)
 	print latest_update
 	print str(category_id) + " - " + feed_url
@@ -41,10 +41,11 @@ for (id,category_id,feed_url,last_updated) in category_mapping_cursor:
 		#     query='insert into content (links,description) VALUES ("%s","%s")' % (re.escape(i['link']),re.escape(i['description']))
 		#     cursor.execute(query)
 		# content += '</html>'
-
-	update_last_publish_date_query="update category_mapping set last_updated='%s' where id = %d" % (max(dateset).strftime('%Y-%m-%d %H:%M:%S'),id)
-	update_category_mapping_cursor.execute(update_last_publish_date_query)
-	print update_last_publish_date_query
+	print dateset
+	if dateset:
+		update_last_publish_date_query="update category_mapping set last_updated='%s' where id = %d" % (max(dateset).strftime('%Y-%m-%d %H:%M:%S'),id)
+		update_category_mapping_cursor.execute(update_last_publish_date_query)
+		print update_last_publish_date_query
 db.commit()
 category_mapping_cursor.close()
 content_cursor.close()
