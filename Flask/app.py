@@ -2,29 +2,38 @@ from flask import Flask ,flash, session , redirect, url_for
 from flask import render_template
 from flask import request
 import mysql.connector
+from passlib.apps import custom_app_context as pwd_context
+import logging
+
+# Set up logging
+logging.basicConfig(
+    format="%(levelname)s: %(asctime)s %(message)s",
+    filename="/tmp/flask.log",
+    level=logging.INFO,
+)
 
 app = Flask(__name__)
 app.secret_key = 'SecrestKey123!#'
 app.host = '0.0.0.0'
 db=mysql.connector.connect(database="kresp",user='kresp')
-
-
     
 @app.route("/login", methods=['POST','GET'])
 def login():
     user_cursor=db.cursor(buffered = True)
     error = "None" 
     if(request.method == 'POST'):
-        user_query='select email_id from user where email_id = %s and password= %s'
-        user_cursor.execute(user_query,(request.form['username'], request.form['password']))
-        result = user_cursor.fetchone()
+        user_query='select email_id,password_hash from user where email_id = "%s"' % request.form['username'] 
+        user_cursor.execute(user_query)
+        if user_cursor.rowcount:
+            tmp,result = user_cursor.fetchone()
+            if pwd_context.verify(str(request.form['password']), result):
+                session['logged_in'] = True
+                return redirect(url_for('.home', username=request.form['username']))
+            else:
+                flash("Invalid credentials. Please try again.")
+                return render_template('login.html')
+
         user_cursor.close()
-        if(result is not None):
-            session['logged_in'] = True
-            return redirect(url_for('.home', username=result[0]))
-        else:
-            flash("Invalid credentials. Please try again.")
-            return render_template('login.html')
     else:   
         return render_template('login.html', error=error)
 
