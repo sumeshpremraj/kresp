@@ -64,8 +64,7 @@ def home():
     category_mapping_cursor.execute(category_mapping_providers_query)
     provider_list= []
     for site_name in category_mapping_cursor:
-        provider_list.append(site_name)
-
+        provider_list.append(site_name[0])
     user_cursor.close()
     categories_cursor.close()
     category_mapping_cursor.close()
@@ -85,8 +84,10 @@ def signup():
              for category in request.form.getlist('categories'):
                  category_list += category + ","    
              user_insert_query = "insert into user(email_id,kindle_id,password,frequency,category_ids) values('%s','%s','%s','%s','%s')" %(request.form['username'],request.form['kindle_id'],request.form['password'],request.form['frequency'],category_list[:-1])
-             if(user_cursor.execute( user_insert_query)):
+             print user_insert_query
+             if(user_cursor.execute(user_insert_query)):
                 #redirect to login
+                db.commit()
                 user_cursor.close()
                 return redirect(url_for('.login'))
              else:
