@@ -1,0 +1,146 @@
+<html>
+    <style>
+        
+        .field-container{
+            padding-top: 2%;
+        }
+                
+        @media only screen and (max-width: 800px) {
+            /* For mobile phones: */
+            .form-container{
+                    border-style: groove;
+                    padding: 10px;
+                     display: table;
+                     margin: auto;
+            }
+            body{
+                height: inherit;
+                background-color: beige;
+            }
+            header{
+                color:black;
+                text-align: center; 
+                padding-top: 0%;
+            }
+        }
+        
+        @media only screen and (min-width: 800px) {
+                body {
+                    background-image: url('static/img/bg2.jpg');
+                    background-size: cover;
+            }
+            
+             .form-container{
+                background-color: white;
+                 display: table;
+                margin: auto;
+                margin-top: 10%; 
+                vertical-align: middle; 
+                border-style: hidden;
+                padding: 10px; 
+            }
+            
+             header{
+                color:white;
+                text-align: center;
+                 font-family: sans-serif;
+                font-size-adjust: auto;
+                font-size: 28px;
+            }
+            label{
+                color: black;
+                font-family: sans-serif;
+                font-size-adjust: auto;
+                font-size: 12px;
+            }
+             .button-0 {
+            position: relative;
+            padding: 8px 20px;
+            margin: 0px 10px 10px 0px;
+            border-radius: 10px;
+            font-family: 'Helvetica', cursive;
+            color: #FFF;
+            font-size: 16px;
+            text-decoration: none;  
+            background-color: #3498DB;
+            border-bottom: 5px solid #2980B9;
+            text-shadow: 0px -2px #2980B9;
+            /* Animation */
+            transition: all 0.1s;
+            -webkit-transition: all 0.1s;
+            }
+
+            .button-0:hover, 
+            .button-0:focus {
+                text-decoration: none;
+                color: #fff;
+            }
+
+            .button-0:active {
+                transform: translate(0px,5px);
+                -webkit-transform: translate(0px,5px);
+                border-bottom: 1px solid;
+            }
+        }
+        
+        
+  
+    </style>
+    <head>
+    </head>
+    <body>
+        <header>
+            <h1>SignUp</h1>
+        </header>
+        <div class="form-container">
+            <form autocomplete="on" action="/signup" method="post">
+                <div>
+                    <div>
+                        <input type="text" name="username" placeholder="Your email id">
+                   
+                        <input style="float:right;" type="password" name="password" placeholder="Password" >
+                    </div>
+                   
+                    <div class="field-container">
+                        <input type="text" name="kindle_id" placeholder="Your Kindle Id">
+                       
+                        <input style="float:right;"  type="password" name="re-password" placeholder="Re-type Password" >
+                    </div>
+                     <div class="field-container">
+                        <label>Select the categories that you are interested in</label><br>
+                        {% for category in allCategories %}
+                             <input type="checkbox" onchange="this.form.submit()" name="categories" value={{category.id}}>{{category.name}}<br>
+                        {% endfor %}
+                      </div>
+                      <div class="field-container">
+                        <label>Our content providers are listed below. You can add personal providers as well.</label>
+                        <ul>
+                          <li>Provider 1</li>
+                          <li>Provider 2</li>
+                          <li><input type="text" name="providers" placeholder="custom providers"> </li>  
+                        </ul>                         
+                      </div>
+                     <div class="field-container">
+                        <label>Frequency of newsletters.</label><br>
+                        <select name="frequency">
+                          <option value="1" >Daily</option>
+                          <option value="7">Weekly</option>
+                          <option value="14">Bi-weekly</option>
+                          <option value="30">Monthly</option>
+                        </select>                       
+                      </div>
+                    <hr>
+                     <div>
+                         <p>In order to be able to receive the newsletters, <br>
+                             please add <b>kindlefellas@gmail.com</b> as a receiver on your kindle account.</p>
+                    </div>
+                    <hr>
+                    <div class="field-container">
+                        <button class="button-0" type="submit">Submit</button>
+                    </div>
+                </div>    
+            </form>
+              {% extends "layout.html" %}
+        </div>
+    </body>
+</html>
