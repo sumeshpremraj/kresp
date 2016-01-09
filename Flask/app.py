@@ -10,6 +10,14 @@ app = Flask(__name__)
 app.secret_key = 'SecrestKey123!#'
 app.host = '0.0.0.0'
 db=mysql.connector.connect(database="kresp",user='kresp')
+
+@app.route("/", methods=['POST','GET'])
+def root():
+    if(session['logged_in'] and session['user']):
+        return redirect(url_for('.home', session['user']))
+    else:
+        return redirect(url_for('.login')
+                        
     
 @app.route("/login", methods=['POST','GET'])
 def login():
@@ -27,10 +35,12 @@ def login():
                 flash("Invalid credentials. Please try again.")
                 return render_template('login.html')
 
-        user_cursor.close()
+        else:   
+        return render_template('login.html', error=error)
     else:   
         return render_template('login.html', error=error)
-
+user_cursor.close()
+                        
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
