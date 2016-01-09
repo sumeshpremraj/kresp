@@ -8,7 +8,7 @@ db=mysql.connector.connect(database="kresp",user='kresp')
 #query='insert into content (links,description) VALUES ("hello","hi")'
 cursor=db.cursor(buffered = True)
 insert_cursor=db.cursor(buffered = True)
-all_links_query='select category_id,feed_url from category_mapping'
+all_links_query='select category_id,feed_url,last_updated from category_mapping'
 cursor.execute(all_links_query)
 for (category_id,feed_url) in cursor:
 	print str(category_id) + " - " + feed_url

@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS `category_mapping` (
   `category_id` int(11) NOT NULL,
   `feed_url` varchar(200) NOT NULL,
   `site_name` varchar(200) NOT NULL,
+  `last_updated` datetime DEFAULT NULL,
   KEY `category_id` (`category_id`),
   CONSTRAINT `category_mapping_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
