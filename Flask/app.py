@@ -31,12 +31,13 @@ def login():
                 session['logged_in'] = True
                 return redirect(url_for('.home', username=request.form['username']))
             else:
+                pass
+        else:
                 flash("Invalid credentials. Please try again.")
                 return render_template('login.html')
-
-        user_cursor.close()
     else:   
         return render_template('login.html', error=error)
+    user_cursor.close()
 
 @app.route('/logout')
 def logout():
