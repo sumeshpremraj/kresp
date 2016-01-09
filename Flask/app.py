@@ -63,15 +63,21 @@ def home():
     category_id_list = ""
     for (category_ids) in user_cursor:
         category_id_list = ''.join(category_ids)
-    # get all categories selected by user    
-    categories_user_name_fetch_query = "select * from categories where id in (%s)" % category_id_list 
-    categories_cursor.execute(categories_user_name_fetch_query)
-    user_categories_list = []
-    for (category) in categories_cursor:
-        user_categories_list.append({'id':str(category[0]), 'name':str(category[1])})
+    # get all categories selected by user
+    if(len(category_id_list) <=0 ):
+        user_categories_list = []
+    else:    
+        categories_user_name_fetch_query = "select * from categories where id in (%s)" % category_id_list 
+        categories_cursor.execute(categories_user_name_fetch_query)
+        user_categories_list = []
+        for (category) in categories_cursor:
+            user_categories_list.append({'id':str(category[0]), 'name':str(category[1])})
 
-    #get all categories not selected by user    
-    categories_all_name_fetch_query = "select * from categories where id not in (%s)" % category_id_list 
+    #get all categories not selected by user 
+    if(len(category_id_list) <=0 ):
+        categories_all_name_fetch_query = "select * from categories"
+    else:
+        categories_all_name_fetch_query = "select * from categories where id not in (%s)" % category_id_list 
     categories_cursor.execute(categories_all_name_fetch_query)
     all_categories_list = []
     for (category) in categories_cursor:
@@ -100,8 +106,15 @@ def home():
     user_cursor.close()
     categories_cursor.close()
     category_mapping_cursor.close()
-        
-    return render_template('home.html', kindle_id=kindle_id,
+    if("kindle" not in request.headers.get('User-Agent')):
+            #render template with javascript   
+            return render_template('home_JS.html', kindle_id=kindle_id,
+                           categories=user_categories_list, allCategories= all_categories_list,providers=['blah1@domain.com'],
+                           allProviders=provider_list, frequencies=freq_list,
+                           otherFrequencies=[{'id': 7, 'name': 'Daily'},'Weekly','Bi-weekly'])
+    else:
+        #render template without javascript   
+            return render_template('home.html', kindle_id=kindle_id,
                            categories=user_categories_list, allCategories= all_categories_list,providers=['blah1@domain.com'],
                            allProviders=provider_list, frequencies=freq_list,
                            otherFrequencies=[{'id': 7, 'name': 'Daily'},'Weekly','Bi-weekly'])
@@ -137,7 +150,12 @@ def signup():
         for (category) in categories_cursor:
             all_categories_list.append({'id':str(category[0]), 'name':str(category[1])})
         categories_cursor.close()   
-        return render_template('signUp.html',allCategories= all_categories_list)
+        if("kindle" not in request.headers.get('User-Agent')):
+            #render template with javascript
+            return render_template('signUp_JS.html',allCategories= all_categories_list)
+        else:
+            #render template without javascript
+            return render_template('signUp.html',allCategories= all_categories_list)
     
     
     
