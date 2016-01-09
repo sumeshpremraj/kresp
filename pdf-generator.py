@@ -3,6 +3,7 @@ import pdfkit
 import feedparser
 import mysql.connector
 import re
+from os import environ
 
 content = '''
 <html>
@@ -150,7 +151,7 @@ print message
 try:
     smtpObj = smtplib.SMTP("smtp.gmail.com", 587)
     smtpObj.starttls()
-    smtpObj.login("kindlefellas@gmail.com", "MRjiAls9uHoxXAt")
+    smtpObj.login("kindlefellas@gmail.com", environ.get('PASS'))
     #smtpObj.sendmail("kindlefellas@gmail.com", "sumesh.p@onlyfordemo.com", message)
     smtpObj.sendmail(sender, recipient, message)
     print "Successfully sent email"
