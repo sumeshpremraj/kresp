@@ -3,6 +3,7 @@ import pdfkit
 import feedparser
 import mysql.connector
 import re
+from os import environ
 
 content = '''
 <html>
@@ -98,3 +99,61 @@ pdfkit.from_string(content, '/tmp/newsletter.pdf')
 		#     query='insert into content (links,description) VALUES ("%s","%s")' % (re.escape(i['link']),re.escape(i['description']))
 		#     cursor.execute(query)
 		# content += '</html>'
+
+
+import smtplib
+import base64
+filename = "/tmp/newsletter.pdf"
+sender = "kindlefellastest@gmail.com"
+recipient = "sumeshpremraj@kindle.com"
+
+# Read a file and encode it into base64 format
+fo = open(filename, "rb")
+filecontent = fo.read()
+encodedcontent = base64.b64encode(filecontent)
+
+marker = "001a113ec99464560f0528e638f8"
+
+body ="""
+Newsletter for DATE
+"""
+
+# Define the main headers.
+part1 = """From: Sumesh <%s>
+To: Su <%s>
+Subject: Newsletter
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary=%s
+
+--%s
+""" % (sender, recipient, marker, marker)
+
+# Define the message action
+part2 = """Content-Type: text/plain
+Content-Transfer-Encoding:8bit
+
+%s
+--%s
+""" % (body,marker)
+
+# Define the attachment section
+part3 = """Content-Type: application/pdf; name=\"newsletter.pdf\"
+Content-Disposition: attachment; filename=\"newsletter.pdf\"
+Content-Transfer-Encoding: base64
+
+%s
+--%s--
+""" %(encodedcontent, marker)
+message = part1 + part2 + part3
+
+print message
+
+try:
+    smtpObj = smtplib.SMTP("smtp.gmail.com", 587)
+    smtpObj.starttls()
+    smtpObj.login("kindlefellas@gmail.com", environ.get('PASS'))
+    #smtpObj.sendmail("kindlefellas@gmail.com", "sumesh.p@onlyfordemo.com", message)
+    smtpObj.sendmail(sender, recipient, message)
+    print "Successfully sent email"
+except Exception:
+    print "Error: unable to send email"
