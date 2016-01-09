@@ -13,14 +13,18 @@ db=mysql.connector.connect(database="kresp",user='kresp')
 
 @app.route("/", methods=['POST','GET'])
 def root():
-    if(session['logged_in'] and session['user']):
-        return redirect(url_for('.home', session['user']))
-    else:
-        return redirect(url_for('.login')
+    session.permanent = True
+    try:
+        user = session['user'] 
+        return redirect(url_for('.home', username=user))    
+    except KeyError:
+        session['logged_in']= False
+    return redirect(url_for('.login'))
                         
     
 @app.route("/login", methods=['POST','GET'])
 def login():
+    session.permanent = True              
     user_cursor=db.cursor(buffered = True)
     error = "None" 
     if(request.method == 'POST'):
@@ -30,17 +34,17 @@ def login():
             tmp,result = user_cursor.fetchone()
             if pwd_context.verify(request.form['password'], result):
                 session['logged_in'] = True
+                session['user'] = request.form['username']
                 return redirect(url_for('.home', username=request.form['username']))
             else:
+                pass
+        else:
                 flash("Invalid credentials. Please try again.")
                 return render_template('login.html')
-
-        else:   
-        return render_template('login.html', error=error)
     else:   
         return render_template('login.html', error=error)
-user_cursor.close()
-                        
+    user_cursor.close()
+
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
