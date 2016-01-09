@@ -105,11 +105,11 @@
         {% if session.logged_in %}
             <div class="form-container">
                 <p>You can edit your preferences below.</p>
-                <form autocomplete="on" method="post" action="/update">
+                <form autocomplete="on" action="/update" method="post" >
                     <div>
                         <div>
                             <label>Device Id/Username</label><br>
-                            <input type="text" placeholder="Your Email" name="username" value={{username}}>
+                            <input type="text" placeholder="Your Kindle Id" name="kindle_id" value={{kindle_id}}>
                         </div>
                          <div class="field-container">
                             <label>Select the categories that you are interested in</label><br>

@@ -97,15 +97,14 @@
                 <div>
                     <div>
                         <input type="text" name="username" placeholder="Your email id">
+                   
+                        <input style="float:right;" type="password" name="password" placeholder="Password" >
                     </div>
+                   
                     <div class="field-container">
                         <input type="text" name="kindle_id" placeholder="Your Kindle Id">
-                    </div>
-                    <div class="field-container">
-                        <input type="password" name="password" placeholder="Password" >
-                    </div>
-                     <div class="field-container">
-                        <input type="password" name="re-password" placeholder="Re-type Password" >
+                       
+                        <input style="float:right;"  type="password" name="re-password" placeholder="Re-type Password" >
                     </div>
                      <div class="field-container">
                         <label>Select the categories that you are interested in</label><br>
@@ -130,15 +129,18 @@
                           <option value="30">Monthly</option>
                         </select>                       
                       </div>
+                    <hr>
                      <div>
                          <p>In order to be able to receive the newsletters, <br>
                              please add <b>kindlefellas@gmail.com</b> as a receiver on your kindle account.</p>
                     </div>
+                    <hr>
                     <div class="field-container">
                         <button class="button-0" type="submit">Submit</button>
                     </div>
                 </div>    
             </form>
+              {% extends "layout.html" %}
         </div>
     </body>
 </html>
