@@ -105,19 +105,19 @@
         {% if session.logged_in %}
             <div class="form-container">
                 <p>You can edit your preferences below.</p>
-                <form autocomplete="on">
+                <form autocomplete="on" method="post" action="/update">
                     <div>
                         <div>
                             <label>Device Id/Username</label><br>
-                            <input type="text" placeholder="Username- Kindle ID" value={{username}}>
+                            <input type="text" placeholder="Your Email" name="username" value={{username}}>
                         </div>
                          <div class="field-container">
                             <label>Select the categories that you are interested in</label><br>
                             {% for category in categories %}
-                             <input type="checkbox" value={{category.id}} checked >{{category.name}}<br>
+                             <input type="checkbox" name="categories" value={{category.id}} checked >{{category.name}}<br>
                             {% endfor %}
                             {% for category in allCategories %}
-                             <input type="checkbox" value={{category.id}}>{{category.name}}<br>
+                             <input type="checkbox" name="categories" value={{category.id}}>{{category.name}}<br>
                             {% endfor %}
                           </div>
                           <div class="field-container">
@@ -129,21 +129,20 @@
                                 {% for provider in allProviders %}    
                                     <li>{{provider}}</li>
                                 {% endfor %}
-                              <li> <input type="text" placeholder="custom provider"></li>  
+                              <li> <input type="text" name="provider" placeholder="custom provider"></li>  
                             </ul>                         
                           </div>
                          <div class="field-container">
                             <label>Frequency of newsletters.</label><br>
-                            <select>
-                              {% for frequency in otherFrequencies %}    
-                                    <option value={{frequency}}>{{frequency}}</option>
+                            <select name="frequency">
+                              {% for frequency in frequencies %}    
+                                    <option value={{frequency.id}} {{frequency.selected}}>{{frequency.name}}</option>
                               {% endfor %}   
-                              <option value={{frequency}} selected>{{frequency}}</option>
                             </select>                       
                           </div>
                         <br>
                          <div>
-                            <a href="/resetpwd" >Reset Password</a><br>
+                           <!--  <a href="/resetpwd" >Reset Password</a><br>-->
                              <a href="" >Unsubscribe </a>
                         </div>
                         <div class="field-container">
