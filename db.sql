@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `content` (
   `link` varchar(200) NOT NULL,
   `title` varchar(200) NOT NULL,
   `description` varchar(1000) DEFAULT NULL,
+  `publish_date` datetime DEFAULT NULL,
 	FOREIGN KEY (`category_id`) REFERENCES categories(`id`),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -49,12 +50,15 @@ VALUES
   (2, 'science');
 
 CREATE TABLE IF NOT EXISTS `category_mapping` (
-  `category_id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) NOT NULL,
   `feed_url` varchar(200) NOT NULL,
   `site_name` varchar(200) NOT NULL,
+  `last_updated` datetime DEFAULT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`),
   KEY `category_id` (`category_id`),
   CONSTRAINT `category_mapping_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `category_mapping` (`category_id`, `feed_url`, `site_name`)
 VALUES
@@ -68,6 +72,9 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email_id` varchar(200) NOT NULL,
   `kindle_id` varchar(200) NOT NULL,
   `category_ids` varchar(200) NOT NULL,
+  `last_sent_date` datetime DEFAULT NULL,
+  `frequency` int(11) DEFAULT NULL,
+  UNIQUE KEY `username` (`username`)
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
