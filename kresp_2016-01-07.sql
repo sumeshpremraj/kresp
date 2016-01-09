@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `content` (
   `link` varchar(200) NOT NULL,
   `title` varchar(200) NOT NULL,
   `description` varchar(1000) DEFAULT NULL,
+  `publish_date` datetime DEFAULT NULL,
 	FOREIGN KEY (`category_id`) REFERENCES categories(`id`),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

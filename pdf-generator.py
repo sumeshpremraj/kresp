@@ -15,10 +15,10 @@ for (kindle_id,category_ids) in user_cursor:
     print kindle_id
     cats = category_ids.split(",")
     for i in cats:
-    	content_query = "select link from content where category_id = %s" %i
+    	content_query = "select link,description from content where category_id = %s" %i
     	content_cursor.execute(content_query)
-    	for link in content_cursor:
-    		print link
+    	for (link,description) in content_cursor:
+    		print link + "\n" + description
 
 #for (category_id,feed_url) in cursor:
 #	print str(category_id) + " - " + feed_url
