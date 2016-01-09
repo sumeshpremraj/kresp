@@ -22,6 +22,7 @@ def login():
         user_cursor.close()
         if(result is not None):
             session['logged_in'] = True
+            session['user'] = result[0]
             return redirect(url_for('.home', username=result[0]))
         else:
             flash("Invalid credentials. Please try again.")
@@ -32,6 +33,7 @@ def login():
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
+    session.pop('user', None)
     flash ('You have been logged out')
     return login()
 
@@ -67,11 +69,11 @@ def home():
     for site_name in category_mapping_cursor:
         provider_list.append(site_name[0])
         
-    user_data_query = "select frequency from user where email_id = '%s'" % request.args['username'] 
+    user_data_query = "select frequency, kindle_id from user where email_id = '%s'" % request.args['username'] 
     user_cursor.execute(user_data_query)
     for (frequency) in user_cursor:
         freq = frequency[0]
-        print (freq)
+        kindle_id = frequency[1]
     freq_list = []   
     frequency = {1: 'Daily', 7: 'Weekly', 14: 'Bi-weekly', 30:'Monthly'}
     for i in frequency:
@@ -84,7 +86,7 @@ def home():
     categories_cursor.close()
     category_mapping_cursor.close()
         
-    return render_template('home.html', username=request.args.get('username'),
+    return render_template('home.html', kindle_id=kindle_id,
                            categories=user_categories_list, allCategories= all_categories_list,providers=['blah1@domain.com'],
                            allProviders=provider_list, frequencies=freq_list,
                            otherFrequencies=[{'id': 7, 'name': 'Daily'},'Weekly','Bi-weekly'])
@@ -120,38 +122,33 @@ def signup():
             all_categories_list.append({'id':str(category[0]), 'name':str(category[1])})
         categories_cursor.close()   
         return render_template('signUp.html',allCategories= all_categories_list)
+    
+    
+    
 
-@app.route("/upload" ,methods=['POST','GET'])
-def upload():
+@app.route("/update" ,methods=['POST','GET'])
+def update():
     if (request.method == 'POST'):
          user_cursor=db.cursor(buffered = True)
          #Do more validation
-         if (request.form['username'] and request.form['password'] ):
+         if (session['logged_in'] ):
              category_list = ""
              for category in request.form.getlist('categories'):
                  category_list += category + ","    
-             user_insert_query = "insert into user(email_id,kindle_id,password,frequency,category_ids) values('%s','%s','%s','%s','%s')" %(request.form['username'],request.form['kindle_id'],request.form['password'],request.form['frequency'],category_list[:-1])
-             print user_insert_query
-             if(user_cursor.execute(user_insert_query)):
+             user_update_query = "update user set kindle_id = '%s', frequency = '%s' , category_ids = '%s' where email_id = '%s'" %(request.form['kindle_id'],request.form['frequency'],category_list[:-1], session['user'])
+             print user_update_query
+             if(user_cursor.execute(user_update_query)):
                 #redirect to login
                 db.commit()
                 user_cursor.close()
-                return redirect(url_for('.login'))
+                return redirect(url_for('.home', username=session['user']))
              else:
                  user_cursor.close()
-                 flash("Unexpected Error")        
+                 return("Unexpected Error")        
          else:
-            flash ("There was an error")
+            return ("There was an error")
     else:
-        categories_cursor=db.cursor(buffered = True)
-        #get all categories not selected by user    
-        categories_all_name_fetch_query = "select * from categories" 
-        categories_cursor.execute(categories_all_name_fetch_query)
-        all_categories_list = []
-        for (category) in categories_cursor:
-            all_categories_list.append({'id':str(category[0]), 'name':str(category[1])})
-        categories_cursor.close()   
-        return render_template('signUp.html',allCategories= all_categories_list)
+        return("Something isn't right")
     
     
     
