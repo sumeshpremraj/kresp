@@ -72,6 +72,9 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email_id` varchar(200) NOT NULL,
   `kindle_id` varchar(200) NOT NULL,
   `category_ids` varchar(200) NOT NULL,
+  `last_sent_date` datetime DEFAULT NULL,
+  `frequency` int(11) DEFAULT NULL,
+  UNIQUE KEY `username` (`username`)
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
