@@ -36,7 +36,7 @@
                 margin: auto;
                 margin-top: 5%; 
                 vertical-align: middle; 
-                border-style: inset;
+                border-style: hidden;
                 padding: 10px; 
             }
             
@@ -114,10 +114,10 @@
                          <div class="field-container">
                             <label>Select the categories that you are interested in</label><br>
                             {% for category in categories %}
-                             <input type="checkbox" value={{category}} checked >{{category}}<br>
+                             <input type="checkbox" value={{category.id}} checked >{{category.name}}<br>
                             {% endfor %}
                             {% for category in allCategories %}
-                             <input type="checkbox" value={{category}}  >{{category}}<br>
+                             <input type="checkbox" value={{category.id}}>{{category.name}}<br>
                             {% endfor %}
                           </div>
                           <div class="field-container">

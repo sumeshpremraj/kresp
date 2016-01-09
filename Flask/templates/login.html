@@ -20,6 +20,21 @@
             
         }
         
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            float:right;
+            width: 300px;
+        }
+        
+        .alert-info {
+            color: #3a87ad;
+            background-color: #d9edf7;
+            border-color: #bce8f1;
+        }
+        
         @media only screen and (max-width: 800px) {
             /* For mobile phones: */
             .form-container{
@@ -124,5 +139,6 @@
                 </div>    
             </form>
         </div>
+        {% extends "layout.html" %}
     </body>
 </html>

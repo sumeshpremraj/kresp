@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<style>
+    
+    .alert:focus {
+        background-color: black;
+    } 
+     .alert:hover {
+        display:none;
+    } 
+
+     .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            float:right;
+            width: 300px;
+        }
+        
+        .alert-info {
+            color: #3a87ad;
+            background-color: #d9edf7;
+            border-color: #bce8f1;
+        }
+    </style>
+   {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+        <li><div class="alert alert-info">{{ message }}</div></li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+{% block body %}{% endblock %}     
+</html>

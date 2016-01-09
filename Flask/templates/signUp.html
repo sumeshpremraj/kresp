@@ -36,7 +36,7 @@
                 margin: auto;
                 margin-top: 10%; 
                 vertical-align: middle; 
-                border-style: inset;
+                border-style: hidden;
                 padding: 10px; 
             }
             
@@ -96,7 +96,10 @@
             <form autocomplete="on" action="/signup" method="post">
                 <div>
                     <div>
-                        <input type="text" name="username" placeholder="Username- Kindle ID">
+                        <input type="text" name="username" placeholder="Your email id">
+                    </div>
+                    <div class="field-container">
+                        <input type="text" name="kindle_id" placeholder="Your Kindle Id">
                     </div>
                     <div class="field-container">
                         <input type="password" name="password" placeholder="Password" >
@@ -106,9 +109,9 @@
                     </div>
                      <div class="field-container">
                         <label>Select the categories that you are interested in</label><br>
-                        <input type="checkbox" name="category" value="Art">Art<br>
-                        <input type="checkbox" name="category" value="Sports">Sports<br>
-                        <input type="checkbox" name="category" value="Comics">Comics<br>
+                        {% for category in allCategories %}
+                             <input type="checkbox" name="categories" value={{category.id}}>{{category.name}}<br>
+                        {% endfor %}
                       </div>
                       <div class="field-container">
                         <label>Our content providers are listed below. You can add personal providers as well.</label>
@@ -121,10 +124,10 @@
                      <div class="field-container">
                         <label>Frequency of newsletters.</label><br>
                         <select name="frequency">
-                          <option value="daily" >Daily</option>
-                          <option value="weekly">Weekly</option>
-                          <option value="bi-weekly">Bi-weekly</option>
-                          <option value="monthly">Monthly</option>
+                          <option value="1" >Daily</option>
+                          <option value="7">Weekly</option>
+                          <option value="14">Bi-weekly</option>
+                          <option value="30">Monthly</option>
                         </select>                       
                       </div>
                      <div>
