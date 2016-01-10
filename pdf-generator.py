@@ -74,7 +74,9 @@ content += """
 <!-- /container -->
 <div class="clear"></div>
 <div class="footer">
-<a href="#">Click here to unsubscribe</a> | Content &copy; respective authors
+Content &copy; respective authors
+<br/>
+<strong>Don't forget to delete this PDF after reading!</strong>
 </div>
 </body>
 </html>

@@ -3,3 +3,5 @@ mysql-connector-repackaged==0.3.1
 pdfkit==0.5.0
 python-dateutil==2.4.2
 passlib
+Flask
+pytz
