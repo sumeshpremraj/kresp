@@ -47,7 +47,8 @@ CREATE TABLE IF NOT EXISTS `categories` (
 INSERT INTO `categories` (`id`, `category_name`)
 VALUES
   (1, 'sports'),
-  (2, 'science');
+  (2, 'science'),
+  (3, 'comics');
 
 CREATE TABLE IF NOT EXISTS `category_mapping` (
   `category_id` int(11) NOT NULL,
@@ -63,7 +64,8 @@ CREATE TABLE IF NOT EXISTS `category_mapping` (
 INSERT INTO `category_mapping` (`category_id`, `feed_url`, `site_name`)
 VALUES
   (1, 'http://feeds.bbci.co.uk/sport/0/football/rss.xml', 'BBC - Football'),
-  (2, 'https://www.brainpickings.org/feed/', 'Brainpickings');
+  (2, 'https://www.brainpickings.org/feed/', 'Brainpickings'),
+  (3, 'http://xkcd.com/rss.xml', 'XKCD');
 
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
