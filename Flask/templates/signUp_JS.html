@@ -89,7 +89,7 @@
     <head>
         <script type="application/javascript">
     function changeProviders(){  
-        document.getElementById('theForm').setAttribute('action', '/updateProvider');
+        document.getElementById('theForm').setAttribute('action', '/updateProviderSignUp');
         document.getElementById('theForm').setAttribute('method', 'post');
         document.getElementById('theForm').submit();
         event.preventDefault();
@@ -112,7 +112,7 @@
                     {
                         if(chk_arr[k].checked){
                             submit = true;
-                            document.getElementById('theForm').setAttribute('action', '/update');
+                            document.getElementById('theForm').setAttribute('action', '/signup');
                             document.getElementById('theForm').setAttribute('method', 'post');
                             document.getElementById('theForm').submit();
                             break;

@@ -209,6 +209,78 @@ def updateProvider():
     return getUpdatedProviders(request.form.getlist('categories'), request.form.getlist('providers'))
  
  
+
+@app.route("/updateProviderSignUp" ,methods=['POST','GET'])
+def updateProviderSignUp():    
+    return getUpdatedProviders_SignUp(request.form.getlist('categories'), request.form.getlist('providers'))
+
+
+def getUpdatedProviders_SignUp(cats,provs):
+    category_mapping_cursor=db.cursor(buffered = True)
+    categories_cursor=db.cursor(buffered = True)
+    category_list = ""
+    provider_list = ""
+    for category in cats:
+        category_list += category + ","  
+    for provider in provs:
+        provider_list += provider + ","  
+    if(len(category_list ) <= 0 ):
+         user_categories_list = []
+         categories_all_name_fetch_query = "select * from categories"
+    else:        
+         categories_user_name_fetch_query = "select * from categories where id in (%s)" % category_list[:-1]
+         categories_all_name_fetch_query = "select * from categories where id not in (%s)" % category_list[:-1]
+         categories_cursor.execute(categories_user_name_fetch_query)
+         user_categories_list=[]
+         for (category) in categories_cursor:
+            user_categories_list.append({'id':str(category[0]), 'name':str(category[1])})
+         
+    categories_cursor.execute(categories_all_name_fetch_query)
+    all_categories_list=[]
+    
+    for (category) in categories_cursor:
+        all_categories_list.append({'id':str(category[0]), 'name':str(category[1])})
+    
+     # get all providers selected by user
+    category_mapping_user_providers_query =None
+    category_mapping_all_providers_query = None
+    all_providers_list = []
+    user_providers_list = []
+    if(len(category_list) <=0 and len(provider_list) <=0 ):
+        category_mapping_all_providers_query = "select id,site_name from category_mapping"
+    elif (len(category_list) > 0 and len(provider_list) >0 ):
+        category_mapping_user_providers_query = "select id,site_name from category_mapping where category_id in (%s) and id in (%s)" % (category_list[:-1], provider_list[:-1])
+        category_mapping_all_providers_query = "select id,site_name from category_mapping where category_id in (%s) and id not in (%s)" % (category_list[:-1], provider_list[:-1])
+    elif(len(category_list) > 0 and len(provider_list) <=0):
+        category_mapping_all_providers_query = "select id,site_name from category_mapping where category_id in (%s) " % category_list[:-1]
+    elif(len(category_list) <=0 and len(provider_list) > 0 ):
+        category_mapping_user_providers_query = "select id,site_name from category_mapping where  id in (%s)" %  provider_list[:-1]
+    else:
+        category_mapping_user_providers_query =None
+        category_mapping_all_providers_query = None
+    if(category_mapping_user_providers_query is not None):
+         category_mapping_cursor.execute(category_mapping_user_providers_query) 
+         for (provider) in category_mapping_cursor:
+            user_providers_list.append({'id':str(provider[0]), 'name':str(provider[1])})
+    if(category_mapping_all_providers_query is not None):
+         category_mapping_cursor.execute(category_mapping_all_providers_query)
+         for (provider) in category_mapping_cursor:
+            all_providers_list.append({'id':str(provider[0]), 'name':str(provider[1])})
+       
+    categories_cursor.close()
+    category_mapping_cursor.close()
+    if("kindle" not in request.headers.get('User-Agent')):
+           #render signup template with javascript
+           return render_template('signUp_JS.html', kindle_id=request.form['kindle_id'],
+                           categories=user_categories_list, allCategories= all_categories_list,providers=user_providers_list,
+                           allProviders= all_providers_list)
+    else:
+        #render template without javascript
+        return render_template('signUp.html', kindle_id=request.form['kindle_id'],
+                           categories=user_categories_list, allCategories= all_categories_list,providers=user_providers_list,
+                           allProviders= all_providers_list)    
+    
+ 
 def getUpdatedProviders(cats,provs):
     category_mapping_cursor=db.cursor(buffered = True)
     categories_cursor=db.cursor(buffered = True)
