@@ -20,20 +20,7 @@
             
         }
         
-        .alert {
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid transparent;
-            border-radius: 4px;
-            float:right;
-            width: 300px;
-        }
-        
-        .alert-info {
-            color: #3a87ad;
-            background-color: #d9edf7;
-            border-color: #bce8f1;
-        }
+       
         
         @media only screen and (max-width: 800px) {
             /* For mobile phones: */
@@ -73,6 +60,8 @@
                 font-size-adjust: auto;
                 font-size: 18px;
             }
+            
+            
              .button-0 {
             position: relative;
             padding: 8px 20px;
@@ -116,6 +105,7 @@
   
     </style>
     <head>
+        <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
     </head>
     <body>
          <a class="button-0 right green" href="/signup">Create new account</a>
@@ -124,22 +114,24 @@
         </header>
         <div class="form-container">
             <form method="post" action="/login">
-                <div>
+                <div class="form-inline">
                     <div>
                         <label>Username</label>
-                        <input type="text" id="username" name="username" placeholder="you@kindle.com">
+                        <input  class="form-control"  type="text" id="username" name="username" placeholder="you@kindle.com">
                     </div>
                     <div class="field-container">
                         <label>Password</label>
-                        <input type="password" id="password" name="password">
+                        <input  class="form-control"  type="password" id="password" name="password">
                     </div>
                     <div class="field-container">
-                        <button type="submit" class="button-0" >Login</button>
-                         <a href="#" >Forgot Password</a>
+                        <button type="submit" class="btn btn-primary" >Login</button>
+                         <a class="btn btn-warning" href="#" >Forgot Password</a>
                     </div>
                 </div>    
             </form>
         </div>
+        <footer style="display: block;">
         {% extends "layout.html" %}
+        </footer>
     </body>
 </html>
