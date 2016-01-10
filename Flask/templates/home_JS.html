@@ -127,21 +127,23 @@
                 var submit = false;
                 var chk_arr =  document.getElementsByName("providers");
                 var chklength = chk_arr.length;             
-                for(k=0;k< chklength;k++)
-                {
-                    if(chk_arr[k].checked){
-                        submit = true;
-                        document.getElementById('theForm').setAttribute('action', '/update');
-                        document.getElementById('theForm').setAttribute('method', 'post');
-                        document.getElementById('theForm').submit();
-                        break;
-                    }
-                }
-                
-                if(!submit){
-                    document.getElementById('giveProv').style.display = 'block';
-                    event.preventDefault()
-                }
+                 if(document.getElementById('theForm').checkValidity()){
+                     for(k=0;k< chklength;k++)
+                        {
+                            if(chk_arr[k].checked){
+                                submit = true;
+                                document.getElementById('theForm').setAttribute('action', '/update');
+                                document.getElementById('theForm').setAttribute('method', 'post');
+                                document.getElementById('theForm').submit();
+                                break;
+                            }
+                        }
+
+                        if(!submit){
+                            document.getElementById('noProvError').style.display = 'block';
+                            event.preventDefault();
+                        }
+                 }
                 
             }
 
@@ -159,7 +161,7 @@
                     <div>
                         <div >
                             <label  class="form-group">Device Id/Username</label><br>
-                            <input type="text" class="form-control" placeholder="Your Kindle Id" name="kindle_id" value={{kindle_id}}>
+                            <input type="text" class="form-control" placeholder="Your Kindle Id" name="kindle_id" value={{kindle_id}} required>
                         </div>
                          <div class="field-container">
                             <label  class="form-group">Select the categories that you are interested in</label><br>
@@ -194,7 +196,7 @@
                         </div>
                         <div class="field-container">
                             <button class="btn btn-primary" onClick="javascript:updateUser();">Update</button>
-                            <div id="giveProv" class="alert alert-info" role="alert" style="float:right;display:none;">Atleast 1 provider has to be selected.</div>
+                            <div id="noProvError" class="alert alert-info" role="alert" style="float:right;display:none;">Atleast 1 provider has to be selected.</div>
                         </div>
 
                     </div>    
