@@ -123,8 +123,11 @@
                           </div>
                           <div class="field-container">
                             <label  class="form-group">Our content providers are listed below. You can add personal providers as well.</label><br>
+                            {% for provider in providers %}
+                             <input type="checkbox" name="providers" value={{provider.id}} checked>{{provider.name}}<br>
+                            {% endfor %}
                             {% for provider in allProviders %}
-                             <input type="checkbox" name="categories" value={{provider.id}}>{{provider.name}}<br>
+                             <input type="checkbox" name="providers" value={{provider.id}}>{{provider.name}}<br>
                             {% endfor %}
                             <input type="text" class="form-control"  name="providers" placeholder="custom providers">                        
                          </div>
