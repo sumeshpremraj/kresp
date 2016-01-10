@@ -37,7 +37,11 @@
                 margin-top: 5%; 
                 vertical-align: middle; 
                 border-style: hidden;
-                padding: 10px; 
+                background-color: #fff;
+                border-radius: 15px;
+                width: 550px;
+                padding: 20px 30px;
+
             }
             
              header{
@@ -142,13 +146,14 @@
                         <br>
                          <div>
                            <!--  <a href="/resetpwd" >Reset Password</a><br>-->
-                             <a href="" >Unsubscribe </a>
                         </div>
                         <div class="field-container">
                             <button class="btn btn-primary" type="submit">Update</button>
                         </div>
+
                     </div>    
-                </form>
+                    <p><a href="/unsubscribe">Unsubscribe</a></p>
+            </form>
             </div>
            {% extends "layout.html" %}
          {% endif %}

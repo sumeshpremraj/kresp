@@ -75,11 +75,12 @@ CREATE TABLE IF NOT EXISTS `user` (
   `last_sent_date` datetime DEFAULT NULL,
   `frequency` int(11) DEFAULT NULL,
   `active` boolean not null default 1,
+  `providers_list` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-insert into user(email_id,password,password_hash,kindle_id,category_ids,frequency) values('sumeshpremraj@gmail.com','blah','$6$rounds=677265$FIToeCcwbytFeanm$mle89QD/AAoDbBMlN7DlEZwTDjqMLDq0R2q7XxcyzQEFqlgu8/sdy4Cf9Ghng9zfXA2jj2Ylx3rHAggKnBohG0','sumeshpremraj@kindle.com','1,2',1);
-INSERT INTO `user` (`email_id`,`password`,`password_hash`,`kindle_id`, `category_ids`, `last_sent_date`, `frequency`) VALUES ('kindlefellastest@gmail.com','test','$6$rounds=609132$zF18uPsrtxxCTdyc$dcp8SH6Kw2suxTr1oYdmMlgxzc1cD3LdLXF6NMf9mzIwwFIgEUs7vRb8x9r2Qz.6/RtSCNa.rypEL4uf2ziUZ.','sumeshpremraj@kindle.com', '1,2', NULL, 1);
+insert into user(email_id,password,password_hash,kindle_id,category_ids,frequency,providers_list) values('sumeshpremraj@gmail.com','blah','$6$rounds=677265$FIToeCcwbytFeanm$mle89QD/AAoDbBMlN7DlEZwTDjqMLDq0R2q7XxcyzQEFqlgu8/sdy4Cf9Ghng9zfXA2jj2Ylx3rHAggKnBohG0','sumeshpremraj@kindle.com','1,2',1,'1,2');
+INSERT INTO `user` (`email_id`,`password`,`password_hash`,`kindle_id`, `category_ids`, `last_sent_date`, `frequency`,providers_list) VALUES ('kindlefellastest@gmail.com','test','$6$rounds=609132$zF18uPsrtxxCTdyc$dcp8SH6Kw2suxTr1oYdmMlgxzc1cD3LdLXF6NMf9mzIwwFIgEUs7vRb8x9r2Qz.6/RtSCNa.rypEL4uf2ziUZ.','sumeshpremraj@kindle.com', '1,2', NULL, 1,'1,2');
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

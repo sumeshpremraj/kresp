@@ -37,7 +37,6 @@
                 margin-top: 5%; 
                 vertical-align: middle; 
                 border-style: hidden;
-                padding: 10px; 
             }
             
              header{
@@ -96,7 +95,6 @@
   
     </style>
     <head>
-         <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
     </head>
     <body>
         <a class="button-0 right green" href="/logout">Logout</a>
@@ -106,31 +104,31 @@
         {% if session.logged_in %}
             <div class="form-container">
                 <p>You can edit your preferences below.</p>
-                <form autocomplete="on" action="/update" method="post" class="form-inline">
+                <form autocomplete="on" action="/update" method="post" >
                     <div>
-                        <div  class="form-group">
+                        <div>
                             <label>Device Id/Username</label><br>
-                            <input type="text" class="form-control"  placeholder="Your Kindle Id" name="kindle_id" value={{kindle_id}}>
+                            <input type="text" placeholder="Your Kindle Id" name="kindle_id" value={{kindle_id}}>
                         </div>
-                         <div class="form-group">
+                         <div class="field-container">
                             <label>Select the categories that you are interested in</label><br>
                             {% for category in categories %}
                              <input type="checkbox" name="categories" value={{category.id}} checked >{{category.name}}<br>
                             {% endfor %}
                             {% for category in allCategories %}
-                             <input type="checkbox" class="form-control"  name="categories" value={{category.id}}>{{category.name}}<br>
+                             <input type="checkbox" name="categories" value={{category.id}}>{{category.name}}<br>
                             {% endfor %}
                           </div>
                           <div class="field-container">
                             <label>Our content providers are listed below. You can add personal providers as well.</label>
                             {% for provider in allProviders %}
-                             <input type="checkbox" class="form-control"  name="categories" value={{provider.id}}>{{provider.name}}<br>
+                             <input type="checkbox" name="categories" value={{provider.id}}>{{provider.name}}<br>
                             {% endfor %}
-                            <input type="text" class="form-control"  name="providers" placeholder="custom providers">                        
+                            <input type="text" name="providers" placeholder="custom providers">                        
                           </div>
                          <div class="field-container">
                             <label>Frequency of newsletters.</label><br>
-                            <select class="form-control"  name="frequency">
+                            <select name="frequency">
                               {% for frequency in frequencies %}    
                                     <option value={{frequency.id}} {{frequency.selected}}>{{frequency.name}}</option>
                               {% endfor %}   
@@ -149,5 +147,6 @@
             </div>
            {% extends "layout.html" %}
          {% endif %}
+         
     </body>
 </html>
