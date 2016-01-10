@@ -1,5 +1,6 @@
 <html>
     <style>
+    body { font-family: sans-serif; color: black; }
         
         .field-container{
             padding-top: 2%;
@@ -30,28 +31,39 @@
                     background-size: cover;
             }
             
-             .form-container{
-                background-color: white;
-                 display: table;
-                margin: auto;
-                margin-top: 5%; 
-                vertical-align: middle; 
-                border-style: hidden;
-                padding: 10px; 
-            }
-            
+        .form-container{
+            vertical-align:middle;
+            text-align: center;
+            align-items: center;
+            align-self: center;
+            margin: 10% auto;
+            background-color: #fff;
+            filter: alpha(opacity=90); /* For IE8 and earlier */
+            opacity: 0.9;
+            border-radius: 15px;
+            width: 550px;
+            padding: 10px 10px;
+        }
+        .form-container form {
+            margin-top: 10px;
+        }
+        .form-container form input[type='text']{
+            border: 1px solid #aaa;
+            border-radius: 4px;
+            width: 200px;
+            padding: 10px;
+            margin-bottom: 10px
+        }
+        .form-container form input[type='checkbox']{ margin-right: 8px}
+
              header{
-                color:white;
+
                 text-align: center;
                  font-family: sans-serif;
                 font-size-adjust: auto;
                 font-size: 28px;
             }
-            label{
-                color: black;
-                font-family: sans-serif;
-                font-size-adjust: auto;
-                font-size: 12px;
+            label{ padding-bottom: 5px;
             }
              .button-0 {
             position: relative;
@@ -105,48 +117,62 @@
         <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
     </head>
     <body>
-        <header>
-            <h1>SignUp</h1>
-        </header>
         <div class="form-container">
+        <header>
+            <h1>Sign up</h1>
+
+        </header>
+            <p>Provide the following details:</p>
             <form autocomplete="on" id="theForm" action="/signup" method="post" class="form-inline" >
-                <div>
-                        <div >
+                        <div>
+                            <!--
                             <label  class="form-group">Email ID</label><br>
-                            <input type="text" class="form-control" placeholder="Your email Id" name="username" >
+                            -->
+                            <input type="text" class="form-control" placeholder="Your email ID" name="username" />
+                            <!--<label  class="form-group">Password</label><br>
+                            -->
+                            <input type="text" class="form-control" placeholder="Kindle ID: you@kindle.com" name="kindle_id" />
+
                         </div>
-                        <div >
-                            <label  class="form-group">Kindle ID</label><br>
-                            <input type="text" class="form-control" placeholder="Your Kindle Id" name="kindle_id" >
+
+                        <div>
+                            <!--<label  class="form-group">Re-enter Password</label><br>
+                            -->
+                            <input type="text" class="form-control" type="password" name="password" placeholder="Password" />
+
+                            <input type="text" class="form-control"  type="password" name="re-password" placeholder="Re-type password"  />
                         </div>
-                    <div >
-                            <label  class="form-group">Password</label><br>
-                            <input type="text" class="form-control" type="password" name="password" placeholder="Password"  >
-                        </div>
-                    <div >
-                            <label  class="form-group">Re-enter Password</label><br>
-                            <input type="text" class="form-control"  type="password" name="re-password" placeholder="Re-type Password"  >
+
+                        <div>
+                            <!--<label  class="form-group">Kindle ID</label><br>
+                            -->
+                            <p><strong>Note</strong>: You can add or edit your Kindle ID from <a href="https://www.amazon.com/mn/dcw/myx.html#/home/settings/payment" target="_blank">Kindle settings</a> page.</p>
                         </div>
                     
                      <div class="field-container">
                         <label  class="form-group">Select the categories that you are interested in</label><br>
                             {% for category in categories %}
-                             <input type="checkbox" onchange="javascript:changeProviders();" name="categories" value={{category.id}} checked >{{category.name}}<br>
+                             <input type="checkbox" onchange="javascript:changeProviders();" name="categories" value={{category.id}} checked >{{category.name}}
                             {% endfor %}
                             {% for category in allCategories %}
                              <input type="checkbox" onchange="javascript:changeProviders();" name="categories" value={{category.id}}>{{category.name}}<br>
                             {% endfor %}
                       </div>
                       <div class="field-container">
+                        <!--
                         <label  class="form-group">Our content providers are listed below. You can add personal providers as well.</label>
-                          <br>
+                        -->
+                        <label  class="form-group">Select your content sources:</label>
+                        <br/>
                         {% for provider in allProviders %}
                              <input type="checkbox" name="providers" value={{provider.id}}>{{provider.name}}<br>
                         {% endfor %}
+                        <!--
                           <input type="text" class="form-control" name="providers" placeholder="custom providers"> 
+                        -->
                       </div>
                      <div class="field-container">
-                        <label  class="form-group">Frequency of newsletters.</label><br>
+                        <label  class="form-group">Frequency</label><br/>How often should we send you content?<br/>
                         <select class="form-control" name="frequency">
                           <option value="1" >Daily</option>
                           <option value="7">Weekly</option>
@@ -156,8 +182,8 @@
                       </div>
                     <hr>
                      <div>
-                         <p  class="form-group">In order to be able to receive the newsletters, <br>
-                             please add <b>kindlefellas@gmail.com</b> as a receiver on your kindle account.</p>
+                         <p  class="form-group"><strong>Important</strong>: To receive content,
+                             add <b>kindlefellas@gmail.com</b> to your approved document email list sender on your <a href="https://www.amazon.com/mn/dcw/myx.html#/home/settings/payment" target="_blank">Kindle account</a>.</p>
                     </div>
                    
                     <div class="field-container">
