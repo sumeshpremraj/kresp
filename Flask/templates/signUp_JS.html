@@ -101,16 +101,49 @@
     <head>
         <script type="application/javascript">
     function changeProviders(){  
-        alert("here");
-        document.getElementById('theForm').setAttribute('action', '/updateProvider');
+        document.getElementById('theForm').setAttribute('action', '/updateProviderSignUp');
         document.getElementById('theForm').setAttribute('method', 'post');
         document.getElementById('theForm').submit();
+        event.preventDefault();
     }
     
     function resgisterNewUser(){
-        document.getElementById('theForm').setAttribute('action', '/signup');
-        document.getElementById('theForm').setAttribute('method', 'post');
-        document.getElementById('theForm').submit();
+        var submit = false;
+        var chk_arr =  document.getElementsByName("providers");
+        var chklength = chk_arr.length;      
+       
+       if( document.getElementById('theForm').checkValidity() && document.getElementById("password").value != "" && document.getElementById("password").value !== document.getElementById("re-password").value){
+            document.getElementById('pwdMismatchError').style.display = 'block';
+            document.getElementById('noProvError').style.display = 'none';
+            event.preventDefault();
+            return;
+        }
+        else{
+            if(document.getElementById('theForm').checkValidity()){
+                for(k=0;k< chklength;k++)
+                    {
+                        if(chk_arr[k].checked){
+                            submit = true;
+                            document.getElementById('theForm').setAttribute('action', '/signup');
+                            document.getElementById('theForm').setAttribute('method', 'post');
+                            document.getElementById('theForm').submit();
+                            break;
+                        }
+                    }
+
+                    if(!submit){
+                        document.getElementById('pwdMismatchError').style.display = 'none';
+                        document.getElementById('noProvError').style.display = 'block';
+                        event.preventDefault();
+                        return;
+                    }
+
+                    document.getElementById('theForm').setAttribute('action', '/signup');
+                    document.getElementById('theForm').setAttribute('method', 'post');
+                    document.getElementById('theForm').submit();
+                    event.preventDefault();
+                }
+            }
     }
     
     </script>
@@ -170,6 +203,7 @@
                         <!--
                           <input type="text" class="form-control" name="providers" placeholder="custom providers"> 
                         -->
+                          <!--<input type="text" class="form-control" name="providers" placeholder="custom providers"> -->
                       </div>
                      <div class="field-container">
                         <label  class="form-group">Frequency</label><br/>How often should we send you content?<br/>
@@ -187,7 +221,9 @@
                     </div>
                    
                     <div class="field-container">
-                        <button class="button-0" onClick="resgisterNewUser()">Submit</button>
+                        <button class="button-0" onClick="javascript:resgisterNewUser();">Submit</button>
+                        <div id="noProvError" class="alert alert-info" role="alert" style="float:right;display:none;">Atleast 1 provider has to be selected.<br></div>
+                        <div id="pwdMismatchError" class="alert alert-info" role="alert" style="float:right;display:none;">Entered passwords don't match.<br></div>
                     </div>
                 </div>    
             </form>
