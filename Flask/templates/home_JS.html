@@ -4,6 +4,21 @@
         .field-container{
             padding-top: 2%;
         }
+        
+        .alert {
+            padding: 15px;
+            margin: 20px auto;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            width: 300px;
+        }
+        
+        .alert-info {
+            color: #3a87ad;
+            background-color: #d9edf7;
+            border-color: #bce8f1;
+        }
+  
                 
         @media only screen and (max-width: 800px) {
             /* For mobile phones: */
@@ -101,6 +116,36 @@
     </style>
     <head>
         <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
+         <script type="application/javascript">
+            function changeProviders(){  
+                document.getElementById('theForm').setAttribute('action', '/updateProvider');
+                document.getElementById('theForm').setAttribute('method', 'post');
+                document.getElementById('theForm').submit();
+            }
+
+            function updateUser(){
+                var submit = false;
+                var chk_arr =  document.getElementsByName("providers");
+                var chklength = chk_arr.length;             
+                for(k=0;k< chklength;k++)
+                {
+                    if(chk_arr[k].checked){
+                        submit = true;
+                        document.getElementById('theForm').setAttribute('action', '/update');
+                        document.getElementById('theForm').setAttribute('method', 'post');
+                        document.getElementById('theForm').submit();
+                        break;
+                    }
+                }
+                
+                if(!submit){
+                    document.getElementById('giveProv').style.display = 'block';
+                    event.preventDefault()
+                }
+                
+            }
+
+    </script>
     </head>
     <body>
         <a class="button-0 right green" href="/logout">Logout</a>
@@ -110,7 +155,7 @@
         {% if session.logged_in %}
             <div class="form-container">
                 <p>You can edit your preferences below.</p>
-                <form autocomplete="on" action="/update" method="post" >
+                <form autocomplete="on" id="theForm" action="/update" method="post" >
                     <div>
                         <div >
                             <label  class="form-group">Device Id/Username</label><br>
@@ -119,10 +164,10 @@
                          <div class="field-container">
                             <label  class="form-group">Select the categories that you are interested in</label><br>
                             {% for category in categories %}
-                             <input type="checkbox"  onchange="this.form.submit()" name="categories" value={{category.id}} checked >{{category.name}}<br>
+                             <input type="checkbox"  onchange="javascript:changeProviders();" name="categories" value={{category.id}} checked >{{category.name}}<br>
                             {% endfor %}
                             {% for category in allCategories %}
-                             <input type="checkbox" onchange="this.form.submit()" name="categories" value={{category.id}}>{{category.name}}<br>
+                             <input type="checkbox" onchange="javascript:changeProviders();" name="categories" value={{category.id}}>{{category.name}}<br>
                             {% endfor %}
                           </div>
                           <div class="field-container">
@@ -133,7 +178,7 @@
                             {% for provider in allProviders %}
                              <input type="checkbox" name="providers" value={{provider.id}}>{{provider.name}}<br>
                             {% endfor %}
-                            <input type="text" class="form-control"  name="providers" placeholder="custom providers">                        
+                            <!--<input type="text" class="form-control"  name="providers" placeholder="custom providers">  -->                      
                          </div>
                          <div class="field-container">
                             <label class="form-group">Frequency of newsletters.</label><br>
@@ -148,7 +193,8 @@
                            <!--  <a href="/resetpwd" >Reset Password</a><br>-->
                         </div>
                         <div class="field-container">
-                            <button class="btn btn-primary" type="submit">Update</button>
+                            <button class="btn btn-primary" onClick="javascript:updateUser();">Update</button>
+                            <div id="giveProv" class="alert alert-info" role="alert" style="float:right;display:none;">Atleast 1 provider has to be selected.</div>
                         </div>
 
                     </div>    
