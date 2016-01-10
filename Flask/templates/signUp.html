@@ -115,7 +115,7 @@
                       <div class="field-container">
                         <label>Our content providers are listed below. You can add personal providers as well.</label>
                         {% for provider in allProviders %}
-                             <input type="checkbox" name="categories" value={{provider.id}}>{{provider.name}}<br>
+                             <input type="checkbox" name="providers" value={{provider.id}}>{{provider.name}}<br>
                         {% endfor %}
                         <input type="text" name="providers" placeholder="custom providers">   
                                                 
@@ -136,7 +136,7 @@
                     </div>
                     <hr>
                     <div class="field-container">
-                        <button class="button-0" type="submit">Submit</button>
+                        <button class="btn btn-primary" type="submit">Submit</button>
                     </div>
                 </div>    
             </form>
