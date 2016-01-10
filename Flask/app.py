@@ -37,7 +37,8 @@ def login():
                 session['user'] = request.form['username']
                 return redirect(url_for('.home', username=request.form['username']))
             else:
-                pass
+                flash("Wrong Password. Please try again.")
+                return render_template('login.html')
         else:
                 flash("Invalid credentials. Please try again.")
                 return render_template('login.html')
